@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
         for (i = 0; i < N_THREADS; i++) {
             void *value;
             pthread_join(threads[i], &value);
-            printf("The Core On Which Thread Executed Is %f \n", arg->seconds);
+            printf("The Time Taken By Thread Is  %f \n", arg->seconds);
         }
         s++;
         // Printing out the Size of array and associated execution time.

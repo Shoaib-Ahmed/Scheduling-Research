@@ -15,8 +15,8 @@ NM=nm
 CCADMIN=CCadmin
 RANLIB=ranlib
 CC=gcc
-CCC=g++-4.7
-CXX=g++-4.7
+CCC=g++
+CXX=g++
 FC=gfortran
 AS=as
 
@@ -35,11 +35,12 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/perf_util.o \
 	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
-CFLAGS=-D_GNU_SOURCE
+CFLAGS=-O0 -D_GNU_SOURCE
 
 # CC Compiler Flags
 CCFLAGS=
@@ -52,7 +53,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lpthread -lm
+LDLIBSOPTIONS=-L/usr/local/lib -lpthread -lm -lpapi -lpfm
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -62,10 +63,15 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/microbenchmark: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/microbenchmark ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
+${OBJECTDIR}/perf_util.o: perf_util.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -I/usr/local/lib -MMD -MP -MF $@.d -o ${OBJECTDIR}/perf_util.o perf_util.c
+
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
+	$(COMPILE.c) -g -I/usr/local/lib -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.c
 
 # Subprojects
 .build-subprojects:

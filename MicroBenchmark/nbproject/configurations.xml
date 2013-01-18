@@ -12,7 +12,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Temp</itemPath>
       <itemPath>main.c</itemPath>
+      <itemPath>perf_util.c</itemPath>
+      <itemPath>perf_util.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -35,12 +38,20 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <commandLine>-D_GNU_SOURCE</commandLine>
+          <incDir>
+            <pElem>/usr/local/lib</pElem>
+          </incDir>
+          <commandLine>-O0 -D_GNU_SOURCE</commandLine>
         </cTool>
         <linkerTool>
+          <linkerAddLib>
+            <pElem>/usr/local/lib</pElem>
+          </linkerAddLib>
           <linkerLibItems>
             <linkerLibStdlibItem>PosixThreads</linkerLibStdlibItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
+            <linkerLibLibItem>papi</linkerLibLibItem>
+            <linkerLibLibItem>pfm</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -53,6 +64,9 @@
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>/usr/local/lib</pElem>
+          </incDir>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
